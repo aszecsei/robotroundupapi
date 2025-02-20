@@ -2,9 +2,9 @@ import { PrismaClient } from '@prisma/client'
 import Hapi from '@hapi/hapi'
 
 declare module '@hapi/hapi' {
-    interface ServerApplicationState {
-        prisma: PrismaClient
-    }
+  interface ServerApplicationState {
+    prisma: PrismaClient
+  }
 }
 
 const prismaPlugin: Hapi.Plugin<void> = {

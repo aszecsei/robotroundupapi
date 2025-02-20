@@ -21,17 +21,17 @@ export const init = async () => {
 
   const swaggerOptions = {
     info: {
-        title: 'Robot Roundup API Documentation',
-        version: Pack.version,
-    }
+      title: 'Robot Roundup API Documentation',
+      version: Pack.version,
+    },
   }
   await server.register([
     Inert,
     Vision,
     {
       plugin: HapiSwagger,
-      options: swaggerOptions
-    }
+      options: swaggerOptions,
+    },
   ])
 
   await server.register([prisma, status, users, posts, judgment])
