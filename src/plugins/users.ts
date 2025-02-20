@@ -95,10 +95,10 @@ const transferHandler = async (request: Hapi.Request, h: Hapi.ResponseToolkit) =
 
 const getCitizenshipHandler = async (request: Hapi.Request, h: Hapi.ResponseToolkit) => {
   const { prisma } = request.server.app
-  const id = parseInt(request.params.id)
+  const deviceId = request.params.id as string
 
   try {
-    const user = await prisma.user.findUnique({ where: { id: id } })
+    const user = await prisma.user.findUnique({ where: { deviceId: deviceId } })
     if (!user) {
       return Boom.notFound()
     }
@@ -178,7 +178,7 @@ const usersPlugin: Hapi.Plugin<undefined> = {
         tags: ['api'],
         validate: {
           params: Joi.object({
-            id: Joi.number().integer().min(1),
+            id: Joi.string().required(),
           }).unknown(),
         },
       },
