@@ -20,6 +20,7 @@ const createUserHandler = async (request: Hapi.Request, h: Hapi.ResponseToolkit)
       },
       select: {
         id: true,
+        transfer: true,
       },
     })
     return h.response(createdUser).code(201)
