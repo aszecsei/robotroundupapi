@@ -11,14 +11,15 @@ datasource db {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  deviceId  String  @unique
-  citizen   Boolean @default(false)
-  version   Int     @default(0)
-  posts     Post[]
-  judgments Judgment[]
-  password  String?
-  transfer  String  @unique
+  id            Int     @id @default(autoincrement())
+  deviceId      String  @unique
+  citizen       Boolean @default(false)
+  supercitizen  Boolean @default(false)
+  version       Int     @default(0)
+  posts         Post[]
+  judgments     Judgment[]
+  password      String?
+  transfer      String  @unique
 }
 
 model Post {

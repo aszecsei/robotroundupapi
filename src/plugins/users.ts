@@ -90,6 +90,30 @@ const transferHandler = async (request: Hapi.Request, h: Hapi.ResponseToolkit) =
     }
 }
 
+const getCitizenshipHandler = async (request: Hapi.Request, h: Hapi.ResponseToolkit) => {
+    const { prisma } = request.server.app
+    const id = parseInt(request.params.id)
+
+    try {
+        const user = await prisma.user.findUnique({ where: { id: id } })
+        if (!user) {
+            return Boom.notFound()
+        }
+
+        let citizenship = 'none'
+        if (user.supercitizen) {
+            citizenship = 'supercitizen'
+        } else if (user.citizen) {
+            citizenship = 'citizen'
+        }
+        
+        return h.response({ citizenship }).code(200)
+    } catch (err) {
+        console.error(err)
+        return Boom.internal()
+    }
+}
+
 const usersPlugin: Hapi.Plugin<undefined> = {
     name: 'app/users',
     dependencies: ['prisma'],
@@ -136,6 +160,20 @@ const usersPlugin: Hapi.Plugin<undefined> = {
                     },
                     headers: Joi.object({
                         'authorization': Joi.string().required()
+                    }).unknown()
+                }
+            }
+        })
+
+        server.route({
+            method: 'GET',
+            path: '/citizenship/{id}',
+            handler: getCitizenshipHandler,
+            options: {
+                tags: ['api'],
+                validate: {
+                    params: Joi.object({
+                        id: Joi.number().integer().min(1)
                     }).unknown()
                 }
             }

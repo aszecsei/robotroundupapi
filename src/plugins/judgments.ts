@@ -57,7 +57,7 @@ const judgePostHandler = async (request: Hapi.Request, h: Hapi.ResponseToolkit) 
         if (!user) {
             return Boom.unauthorized()
         }
-        if (!user.citizen) {
+        if (!user.citizen && !user.supercitizen) {
             return Boom.forbidden()
         }
 
