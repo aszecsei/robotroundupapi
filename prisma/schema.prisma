@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  deviceId  String  @unique
+  citizen   Boolean @default(false)
+  version   Int     @default(0)
+  posts     Post[]
+  judgments Judgment[]
+  password  String?
+  transfer  String  @unique
+}
+
+model Post {
+  id            Int     @id @default(autoincrement())
+  content       String
+  author        User    @relation(fields: [authorId], references: [id])
+  authorId      Int
+  version       Int
+  judgments     Judgment[]
+  created       DateTime @default(now())
+}
+
+model Judgment {
+  id        Int     @id @default(autoincrement())
+  judge     User    @relation(fields: [judgeId], references: [id])
+  judgeId   Int
+  post      Post    @relation(fields: [postId], references: [id])
+  postId    Int
+  verdict   Boolean
+  created   DateTime @default(now())
+}

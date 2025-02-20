@@ -1,0 +1,46 @@
+{
+  "name": "robotroundupapi",
+  "version": "0.1.0",
+  "description": "",
+  "main": "lib/main.js",
+  "scripts": {
+    "dev:tsc": "tsc --watch -p .",
+    "dev:serve": "nodemon -e js -w lib lib/main.js",
+    "dev": "run-p dev:*",
+    "test": "cross-env NODE_ENV=test mocha -r ts-node/register test/**/*.test.ts",
+    "lint": "eslint ./src/**",
+    "lint:fix": "eslint ./src/** --fix"
+  },
+  "author": "Alic Szecsei <aszecsei@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@hapi/hapi": "^21.3.12",
+    "@hapi/inert": "^7.1.0",
+    "@hapi/vision": "^7.0.3",
+    "@noble/hashes": "^1.7.1",
+    "@prisma/client": "^6.4.0",
+    "dotenv": "^16.4.7",
+    "hapi-swagger": "^17.3.2",
+    "joi": "^17.13.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@stylistic/eslint-plugin": "^4.0.1",
+    "@types/chai": "^5.0.1",
+    "@types/hapi__joi": "^17.1.15",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.13.4",
+    "chai": "^5.2.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.20.1",
+    "globals": "^15.15.0",
+    "mocha": "^11.1.0",
+    "nodemon": "^3.1.9",
+    "npm-run-all": "^4.1.5",
+    "prisma": "^6.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.1"
+  }
+}
