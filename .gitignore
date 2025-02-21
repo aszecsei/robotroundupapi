@@ -140,3 +140,4 @@ lib
 
 # test db
 prisma/dev.db
+.aider*
